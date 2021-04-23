@@ -44,6 +44,8 @@ namespace Calculator.Controllers
                         var root = ConvertToDouble(firstNumber) + ConvertToDouble(secondNumber);
                         root = Math.Sqrt(root);
                         return Ok(root.ToString());
+                    default:
+                        return BadRequest("Invalid Input");
                 }
             }
             return BadRequest("Invalid Input");
