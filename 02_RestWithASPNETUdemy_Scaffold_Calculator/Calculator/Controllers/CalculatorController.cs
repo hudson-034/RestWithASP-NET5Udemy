@@ -40,13 +40,20 @@ namespace Calculator.Controllers
                     case "average":
                         var average = (ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber))/2;
                         return Ok(average.ToString());
-                    case "square_root":
-                        var root = ConvertToDouble(firstNumber) + ConvertToDouble(secondNumber);
-                        root = Math.Sqrt(root);
-                        return Ok(root.ToString());
                     default:
                         return BadRequest("Invalid Input");
                 }
+            }
+            return BadRequest("Invalid Input");
+        }
+
+        [HttpGet("square-root/{firstNumber}")]
+        public IActionResult SquareRoot(string firstNumber)
+        {
+            if (IsNumeric(firstNumber))
+            {
+                var root = ConvertToDouble(firstNumber);
+                return Ok(Math.Sqrt(root).ToString());
             }
             return BadRequest("Invalid Input");
         }
