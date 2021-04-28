@@ -1,12 +1,14 @@
 using Camadas.Model.Context;
-using Camadas.Service;
-using Camadas.Service.Implementation;
+using Camadas.Business;
+using Camadas.Business.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Camadas.Repository.Implementation;
+using Camadas.Repository;
 
 namespace Camadas
 {
@@ -32,7 +34,8 @@ namespace Camadas
             // Versioning Api
             services.AddApiVersioning();
             // Dependency Injection
-            services.AddScoped<PersonService, PersonImplementation>();
+            services.AddScoped<PersonBusiness, PersonImplementation>();
+            services.AddScoped<PersonRepository, PersonRepositoryImplementation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Camadas.Service.Implementation
+namespace Camadas.Repository.Implementation
 {
-    public class PersonImplementation : PersonService
+    public class PersonRepositoryImplementation : PersonRepository
     {
         private MySQLContext _context;
 
-        public PersonImplementation(MySQLContext context)
+        public PersonRepositoryImplementation(MySQLContext context)
         {
             _context = context;
         }
@@ -71,7 +71,7 @@ namespace Camadas.Service.Implementation
             }
         }
 
-        private bool Exists(long id)
+        public bool Exists(long id)
         {
             return _context.Persons.Any(p => p.Id.Equals(id));
         }

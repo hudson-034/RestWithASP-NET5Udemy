@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Camadas.Service
+namespace Camadas.Business
 {
-    public interface PersonService
+    public interface PersonBusiness
     {
         Person FindById(long id);
         List<Person> FindAll();
