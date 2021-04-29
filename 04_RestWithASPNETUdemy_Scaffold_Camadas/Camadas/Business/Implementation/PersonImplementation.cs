@@ -9,9 +9,9 @@ namespace Camadas.Business.Implementation
 {
     public class PersonImplementation : PersonBusiness
     {
-        private readonly PersonRepository _repository;
+        private readonly IRepository<Person> _repository;
 
-        public PersonImplementation(PersonRepository repository)
+        public PersonImplementation(IRepository<Person> repository)
         {
             _repository = repository;
         }

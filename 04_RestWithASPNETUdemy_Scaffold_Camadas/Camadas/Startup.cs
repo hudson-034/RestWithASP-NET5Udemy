@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Camadas.Repository.Implementation;
 using Camadas.Repository;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using Camadas.Repository.Generic;
 
 namespace Camadas
 {
@@ -48,9 +48,8 @@ namespace Camadas
 
             // Dependency Injection
             services.AddScoped<PersonBusiness, PersonImplementation>();
-            services.AddScoped<PersonRepository, PersonRepositoryImplementation>();
             services.AddScoped<BookBusiness, BookImplementation>();
-            services.AddScoped<BookRepository, BookRepositoryImplementation>();
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

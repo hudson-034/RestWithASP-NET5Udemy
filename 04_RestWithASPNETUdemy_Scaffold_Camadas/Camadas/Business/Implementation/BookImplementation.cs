@@ -9,9 +9,9 @@ namespace Camadas.Business.Implementation
 {
     public class BookImplementation : BookBusiness
     {
-        private readonly BookRepository _repository;
+        private readonly IRepository<Book> _repository;
 
-        public BookImplementation(BookRepository repository)
+        public BookImplementation(IRepository<Book> repository)
         {
             _repository = repository;
         }

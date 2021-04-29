@@ -1,67 +1,75 @@
-﻿using Camadas.Model;
+﻿using Camadas.Model.Base;
 using Camadas.Model.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Camadas.Repository.Implementation
+namespace Camadas.Repository.Generic
 {
-    public class PersonRepositoryImplementation : PersonRepository
+    public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
         private MySQLContext _context;
-
-        public PersonRepositoryImplementation(MySQLContext context)
-        {
+        private DbSet<T> dataset;
+        public GenericRepository(MySQLContext context) {
             _context = context;
+            dataset = context.Set<T>();
         }
-        public Person FindById(long id)
+
+        public List<T> FindAll()
         {
-            return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
+            return dataset.ToList();
         }
-        public List<Person> FindAll()
+
+        public T FindById(long id)
         {
-            return _context.Persons.ToList();
+            return dataset.SingleOrDefault(i => i.Id.Equals(id));
         }
-        public Person Create(Person person)
+
+        public T Create(T item)
         {
             try
             {
-                _context.Add(person);
+                dataset.Add(item);
                 _context.SaveChanges();
+                return item;
             }
             catch (Exception)
             {
                 throw;
             }
-            return person;
         }
-        public Person Update(Person person)
+
+        public T Update(T item)
         {
-            if (!Exists(person.Id)) return null;
-            var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
+            var result = dataset.SingleOrDefault(i => i.Id.Equals(item.Id));
             if (result != null)
             {
                 try
                 {
-                    _context.Entry(result).CurrentValues.SetValues(person);
+                    _context.Entry(result).CurrentValues.SetValues(item);
                     _context.SaveChanges();
+                    return result;
                 }
                 catch (Exception)
                 {
                     throw;
                 }
             }
-            return person;
+            else
+            {
+                return null;
+            }
         }
 
         public void Delete(long id)
         {
-            var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
+            var result = dataset.SingleOrDefault(i => i.Id.Equals(id));
             if (result != null)
             {
                 try
                 {
-                    _context.Persons.Remove(result);
+                    dataset.Remove(result);
                     _context.SaveChanges();
                 }
                 catch (Exception)
@@ -73,7 +81,7 @@ namespace Camadas.Repository.Implementation
 
         public bool Exists(long id)
         {
-            return _context.Persons.Any(p => p.Id.Equals(id));
+            return dataset.Any(i => i.Equals(id));
         }
     }
 }
