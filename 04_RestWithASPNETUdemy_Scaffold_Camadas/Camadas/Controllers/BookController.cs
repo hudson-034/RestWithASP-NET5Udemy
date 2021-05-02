@@ -1,5 +1,5 @@
 ﻿using Camadas.Business;
-using Camadas.Model;
+using Camadas.Data.VO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -34,14 +34,14 @@ namespace Camadas.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Book book)
+        public IActionResult Post(BookVO book)
         {
             if (book == null) return BadRequest();
             return Ok(_bookBusiness.Create(book));
         }
 
         [HttpPut]
-        public IActionResult Put(Book book)
+        public IActionResult Put(BookVO book)
         {
             if (book == null) return BadRequest();
             return Ok(_bookBusiness.Update(book));

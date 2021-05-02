@@ -1,11 +1,7 @@
-﻿using Camadas.Model;
-using Camadas.Business;
+﻿using Camadas.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Camadas.Data.VO;
 
 namespace Camadas.Controllers
 {
@@ -38,14 +34,14 @@ namespace Camadas.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Person person)
+        public IActionResult Post(PersonVO person)
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Create(person));
         }
 
         [HttpPut]
-        public IActionResult Put(Person person)
+        public IActionResult Put(PersonVO person)
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Update(person));
