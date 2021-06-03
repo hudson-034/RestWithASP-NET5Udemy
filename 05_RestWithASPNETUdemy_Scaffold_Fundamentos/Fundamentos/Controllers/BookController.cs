@@ -3,6 +3,7 @@ using Fundamentos.Data.VO;
 using Fundamentos.Hypermedia.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace Fundamentos.Controllers
 {
@@ -21,6 +22,10 @@ namespace Fundamentos.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(List<BookVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
@@ -28,6 +33,10 @@ namespace Fundamentos.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(200, Type = typeof(BookVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
@@ -37,6 +46,9 @@ namespace Fundamentos.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(200, Type = typeof(BookVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post(BookVO book)
         {
@@ -45,6 +57,9 @@ namespace Fundamentos.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(200, Type = typeof(BookVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put(BookVO book)
         {
@@ -53,6 +68,9 @@ namespace Fundamentos.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public IActionResult Delete(long id)
         {
             _bookBusiness.Delete(id);
