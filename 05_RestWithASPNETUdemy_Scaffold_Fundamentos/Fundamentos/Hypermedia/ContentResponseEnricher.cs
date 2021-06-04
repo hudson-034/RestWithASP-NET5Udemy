@@ -40,7 +40,8 @@ namespace Fundamentos.Hypermedia
                 {
                     if (model != null && urlHelper != null)
                     {
-                        await EnrichModel(model, urlHelper);
+                        EnrichModel(model, urlHelper);
+                        //await EnrichModel(model, urlHelper);
                     }
                     //await EnrichModel(model, urlHelper);
                 }

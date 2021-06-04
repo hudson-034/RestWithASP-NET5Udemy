@@ -1,6 +1,7 @@
 ﻿using Fundamentos.Business;
 using Fundamentos.Data.VO;
 using Fundamentos.Hypermedia.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace Fundamentos.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
+    [Authorize("Bearer")]
     [Route("api/[controller]/v{Version:apiVersion}")]
     public class BookController : ControllerBase
     {
