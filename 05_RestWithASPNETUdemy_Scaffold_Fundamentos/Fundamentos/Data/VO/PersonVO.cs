@@ -17,6 +17,8 @@ namespace Fundamentos.Data.VO
         public string Address { get; set; }
         [JsonPropertyName("gênero")]
         public string Gender { get; set; }
+        [JsonPropertyName("enabled")]
+        public bool Enabled { get; set; }
         public List<HyperMediaLink> Links { get; set; } = new List<HyperMediaLink>();
 
         // Quando não quiser renomear o objeto utilizar [JsonIgnore]
